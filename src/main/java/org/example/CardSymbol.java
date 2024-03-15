@@ -1,6 +1,6 @@
 package org.example;
 
-public enum Farbe {
+public enum CardSymbol {
     PIK,
     KARO,
     KREUZ,
