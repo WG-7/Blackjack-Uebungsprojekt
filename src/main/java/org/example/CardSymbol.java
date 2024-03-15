@@ -1,8 +1,8 @@
 package org.example;
 
 public enum CardSymbol {
-    PIK,
-    KARO,
-    KREUZ,
-    HERZ
+    Spades,
+    Clubs,
+    Diamonds,
+    Hearts
 }

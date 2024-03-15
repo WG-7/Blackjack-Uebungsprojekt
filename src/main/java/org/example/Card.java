@@ -6,20 +6,23 @@ public class Card {
     private CardValue value;
 
 
-    public Card(CardSymbol symbol, CardValue value){
-        this.symbol = symbol;
-        this.value = value;
+    public Card(CardSymbol pSymbol, CardValue pValue){
+        symbol = pSymbol;
+        value = pValue;
     }
 
-    public CardSymbol getSymbol(){
-        return this.symbol;
+    public CardSymbol getSuit(){
+        return symbol;
     }
-    public CardValue getValue(){
-        return this.value;
+    public CardValue getRank(){
+        return value;
     }
+//    public CardValue getValue(){
+//        return (int)value;
+//    }
 
     @Override
     public String toString() {
-        return "Symbol: "+symbol+"\t Value: "+value;
+        return "Symbol: "+symbol+"\tValue: "+value;
     }
 }

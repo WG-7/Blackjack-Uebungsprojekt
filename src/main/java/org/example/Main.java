@@ -5,11 +5,12 @@ public class Main {
         System.out.println("Hello World");
 
         Game g1 = new Game();
-        for(int i=0;i<20;i++)
-        {
-            Card newCard = g1.getRandomCard();
-            System.out.println(newCard);
-        }
+        g1.showHand();
+//        for(int i=0;i<20;i++)
+//        {
+//            Card newCard = g1.getRandomCard();
+//            System.out.println(newCard);
+//        }
 
     }
 }
