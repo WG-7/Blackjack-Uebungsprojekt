@@ -1,6 +1,5 @@
 package org.example;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class Game {
@@ -22,16 +21,26 @@ public class Game {
         playerHands.get(currentHand).add(getRandomCard());
     }
 
-    public Card getRandomCard(){
-        CardSymbol r_symbol = CardSymbol.values()[rand.nextInt(4)];
-        CardValue r_value = CardValue.values()[rand.nextInt(13)];
-        return new Card(r_symbol,r_value);
+    private Card getRandomCard(){
+        CardSuit r_suit = CardSuit.values()[rand.nextInt(4)];
+        CardRank r_rank = CardRank.values()[rand.nextInt(13)];
+        return new Card(r_suit,r_rank);
     }
 
-    public void showHand(){
+    public void showHands(){
         dealCard();
         dealCard();
         dealCard();
+        dealCard();
+        dealCard();
+        //second Hand
+        ArrayList<Card> hand1 = new ArrayList<>();
+        playerHands.add(hand1);
+        currentHand = 1;
+        dealCard();
+        dealCard();
+        dealCard();
+
         for(int i=0;i<playerHands.size();i++)
         {
             System.out.print("Hand "+(i+1)+": \n");
@@ -39,6 +48,7 @@ public class Game {
             {
                 System.out.print(playerHands.get(i).get(j)+", \n");
             }
+            System.out.println();
         }
     }
 }

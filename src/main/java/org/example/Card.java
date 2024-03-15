@@ -1,28 +1,23 @@
 package org.example;
-import java.util.Random;
 
 public class Card {
-    private CardSymbol symbol;
-    private CardValue value;
+    private CardSuit suit;
+    private CardRank rank;
 
-
-    public Card(CardSymbol pSymbol, CardValue pValue){
-        symbol = pSymbol;
-        value = pValue;
+    public Card(CardSuit pSuit, CardRank pRank){
+        suit = pSuit;
+        rank = pRank;
     }
 
-    public CardSymbol getSuit(){
-        return symbol;
+    public CardSuit getSuit(){
+        return suit;
     }
-    public CardValue getRank(){
-        return value;
+    public CardRank getRank(){
+        return rank;
     }
-//    public CardValue getValue(){
-//        return (int)value;
-//    }
 
     @Override
     public String toString() {
-        return "Symbol: "+symbol+"\tValue: "+value;
+        return suit+""+rank;
     }
 }
