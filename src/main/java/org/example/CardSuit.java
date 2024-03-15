@@ -1,10 +1,10 @@
 package org.example;
 
 public enum CardSuit {
-    Spades("\u2660"),
-    Clubs("\u2663"),
-    Hearts("\u2661"),
-    Diamonds("\u2662");
+    SPADES("\u2660"),
+    CLUBS("\u2663"),
+    HEARTS("\u2661"),
+    DIAMONDS("\u2662");
 
     private final String suit;
 

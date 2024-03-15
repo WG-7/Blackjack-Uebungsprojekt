@@ -9,15 +9,18 @@ public class Card {
         rank = pRank;
     }
 
-    public CardSuit getSuit(){
+    private CardSuit getSuit(){
         return suit;
     }
-    public CardRank getRank(){
+    private CardRank getRank(){
         return rank;
+    }
+    private int getValue(){
+        return rank.value;
     }
 
     @Override
     public String toString() {
-        return suit+""+rank;
+        return suit+""+rank.shortName;
     }
 }

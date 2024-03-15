@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Game {
-    Random rand = new Random();
+    private Random rand = new Random();
     private Player player;
     private ArrayList<ArrayList<Card>> playerHands;
     private ArrayList<Card> dealerHand;
