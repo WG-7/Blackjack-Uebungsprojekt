@@ -47,10 +47,8 @@
                 <Rectangle width="200" height="300" fill="BLACK"/>
             </HBox>
             <HBox spacing="30" alignment="CENTER">
-                <ImageView fitHeight="200" fitWidth="300"
-                           image=""/>
-                <ImageView fitHeight="200" fitWidth="300"
-                           image=""/>
+                <ImageView fx:id="imagedealer1" fitHeight="290" fitWidth="200"/>
+                <ImageView fx:id="imagedealer2" fitHeight="290" fitWidth="200"/>
             </HBox>
                 <Label text="Kartenwert"/>
         </VBox>
