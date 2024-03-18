@@ -1,7 +1,11 @@
 
-’
-java:S1319+"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(»ŠÓ³ÿÿÿÿÿ8·Í„ˆå1
-ˆ
-java:S1319/"kThe type of "gameHistory" should be an interface such as "List" rather than the implementation "ArrayList".(¯õëß8¸Í„ˆå1
-L	java:S106"+Replace this use of System.out by a logger.(»îÉ®ıÿÿÿÿ8ÒÍ„ˆå1
-L	java:S106("+Replace this use of System.out by a logger.(ìê‡µüÿÿÿÿ8ÕÍ„ˆå1
+¸
+java:S1319*"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(»ŠÓ³ÿÿÿÿÿ8·Í„ˆå1J$dabb9e01-9eea-4780-98f5-0220cb7ac32e
+®
+java:S1319."kThe type of "gameHistory" should be an interface such as "List" rather than the implementation "ArrayList".(¯õëß8¸Í„ˆå1J$40a2e24d-d665-4833-bd21-6040b285831d
+á
+java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(ÊÃÁùÿÿÿÿ8•Œå1J$2db50398-82a5-47ac-9bf0-1bebaea9a222
+
+java:S1124	"EReorder the modifiers to comply with the Java Language Specification.(Ê°âÚÿÿÿÿÿ8›Œå1J$154d62b4-0e79-443c-9655-d73508aedf7c
+r	java:S106"+Replace this use of System.out by a logger.(»îÉ®ıÿÿÿÿ8ÒÍ„ˆå1J$1215cca3-e671-408f-9bd0-7e00a90610ae
+r	java:S106'"+Replace this use of System.out by a logger.(ìê‡µüÿÿÿÿ8ÕÍ„ˆå1J$474fffea-9a09-4ac9-b3e5-5ab49fb70808

@@ -6,11 +6,10 @@ public class BlackjackManager {
     private Player player;
     private ArrayList<Player> allPlayers;
     private ArrayList<Game> gameHistory;
-    private static BlackjackManager instance;
-    public BlackjackManager(){
+    private final static BlackjackManager instance = new BlackjackManager();
+    private BlackjackManager(){
         gameHistory = new ArrayList<>();
         allPlayers = new ArrayList<>();
-        initilizeAndRunBlackjack();
     }
 
     public void initilizeAndRunBlackjack(){
@@ -49,9 +48,6 @@ public class BlackjackManager {
     }
 
     public static BlackjackManager getInstance(){
-        if (instance == null) {
-            instance = new BlackjackManager();
-        }
         return instance;
     }
 }

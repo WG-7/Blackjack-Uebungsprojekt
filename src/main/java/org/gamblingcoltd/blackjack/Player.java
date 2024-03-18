@@ -2,8 +2,8 @@ package org.gamblingcoltd.blackjack;
 
 public class Player {
     private String name;
-    private int balance;
-    public Player(String pName, int pBalance) {
+    private double balance;
+    public Player(String pName, double pBalance) {
         name = pName;
         balance = pBalance;
     }
@@ -11,14 +11,17 @@ public class Player {
     public String getName(){
         return name;
     }
-    public int getBalance(){
+    public double getBalance(){
         return balance;
     }
 
     public void setName(String pName){
         name = pName;
     }
-    public void setBalance(int pBalance) {
+    public void setBalance(double pBalance) {
         balance = pBalance;
+    }
+    public void changeBalance(double pBalance) {
+        balance = balance + pBalance;
     }
 }
