@@ -1,8 +1,8 @@
 package org.example;
 
 public class Card {
-    private CardSuit suit;
-    private CardRank rank;
+    private final CardSuit suit;
+    private final CardRank rank;
 
     public Card(CardSuit pSuit, CardRank pRank){
         suit = pSuit;
@@ -21,6 +21,6 @@ public class Card {
 
     @Override
     public String toString() {
-        return suit+""+rank.shortName;
+        return suit+rank.shortName;
     }
 }

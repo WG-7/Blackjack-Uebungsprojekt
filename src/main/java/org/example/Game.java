@@ -1,9 +1,9 @@
 package org.example;
 import java.util.ArrayList;
-import java.util.Random;
+
 
 public class Game {
-    private Random rand = new Random();
+
     private Player player;
     private ArrayList<ArrayList<Card>> playerHands;
     private ArrayList<Card> dealerHand;
@@ -22,9 +22,7 @@ public class Game {
     }
 
     private Card getRandomCard(){
-        CardSuit r_suit = CardSuit.values()[rand.nextInt(4)];
-        CardRank r_rank = CardRank.values()[rand.nextInt(13)];
-        return new Card(r_suit,r_rank);
+
     }
 
     public void showHands(){
