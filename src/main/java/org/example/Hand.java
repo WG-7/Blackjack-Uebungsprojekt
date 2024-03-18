@@ -11,19 +11,36 @@ public class Hand {
         cards = new ArrayList<>();
     }
 
-    private int getBet(){
+    public int getBet(){
         return bet;
     }
-    private void setBet(int pAmount){
+    public void setBet(int pAmount){
         bet = pAmount;
     }
 
-    private int getHandValue(){
-        return 10;
+    public int getHandValue(){
+        int totalHandValue = 0;
+        int amountOfAces = 0;
+
+        for(int i=0; i < cards.size();i++)
+        {
+            totalHandValue += cards.get(i).getValue();
+            if(cards.get(i).getRank() == CardRank.ACE)
+            {
+                amountOfAces++;
+            }
+        }
+        while(totalHandValue > 21 && amountOfAces > 0)
+        {
+            totalHandValue -= 10;
+            amountOfAces--;
+        }
+
+        return totalHandValue;
     }
 
-    private void addCard(){
-
+    public void newCard(){
+        cards.add(getRandomCard());
     }
     private Card getRandomCard(){
         CardSuit rSuit = CardSuit.values()[rand.nextInt(4)];
@@ -31,11 +48,22 @@ public class Hand {
         return new Card(rSuit,rRank);
     }
 
-    private boolean isBust(){
-        return true;
+    public boolean isBust(){
+        return getHandValue()>21;
     }
-    private boolean isSplitAvailable(){
-        return true;
+    public boolean isSplitAvailable(){
+        //returns if 2 cards and equalValue
+        return cards.size() == 2 && cards.get(0).getValue() == cards.get(1).getValue();
+    }
+
+    public Card getCardAtIndex(int pIndex){
+        return cards.get(pIndex);
+    }
+    public void addCardToHand(Card pCard){
+        cards.add(pCard);
+    }
+    public void removeCardAtIndex(int pIndex){
+        cards.remove(pIndex);
     }
 
     @Override

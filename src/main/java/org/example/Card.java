@@ -9,13 +9,13 @@ public class Card {
         rank = pRank;
     }
 
-    private CardSuit getSuit(){
+    public CardSuit getSuit(){
         return suit;
     }
-    private CardRank getRank(){
+    public CardRank getRank(){
         return rank;
     }
-    private int getValue(){
+    public int getValue(){
         return rank.value;
     }
 
