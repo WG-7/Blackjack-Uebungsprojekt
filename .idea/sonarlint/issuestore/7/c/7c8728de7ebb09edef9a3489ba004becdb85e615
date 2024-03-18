@@ -3,5 +3,7 @@
 java:S1319+"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(»ŠÓ³ÿÿÿÿÿ8·Í„ˆå1
 ˆ
 java:S1319/"kThe type of "gameHistory" should be an interface such as "List" rather than the implementation "ArrayList".(¯õëß8¸Í„ˆå1
+»
+java:S6548"˜A Singleton implementation was detected. Make sure the use of the Singleton pattern is required and the implementation is the right one for the context.(ÊÃÁùÿÿÿÿ8æ’Ñå1
 L	java:S106"+Replace this use of System.out by a logger.(»îÉ®ıÿÿÿÿ8ÒÍ„ˆå1
 L	java:S106("+Replace this use of System.out by a logger.(ìê‡µüÿÿÿÿ8ÕÍ„ˆå1

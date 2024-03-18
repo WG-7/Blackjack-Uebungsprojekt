@@ -1,16 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.gamblingcoltd.blackjack.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<?import javafx.scene.image.ImageView?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamblingcoltd.blackjack.HelloController">
+
+    <!-- Top-Bereich -->
+    <top>
+        <BorderPane>
+            <left>
+                <VBox>
+                    <HBox spacing="10">
+                        <Label text="Name"/>
+                        <Label fx:id="LbPlayerName"/>
+                    </HBox>
+                    <HBox spacing="10">
+                        <Label text="Guthaben"/>
+                        <Label fx:id="LbBalance"/>
+                    </HBox>
+                    <HBox spacing="10">
+                        <Label text="Einsatz"/>
+                        <Label fx:id="LbBet"/>
+                    </HBox>
+                </VBox>
+            </left>
+            <right>
+                <VBox alignment="CENTER">
+                    <Button alignment="CENTER_RIGHT" text="Reset" onAction="#handleResetGame" />
+                    <Button alignment="CENTER_RIGHT" text="Anleitung" onAction="#handleShowInstructions" />
+                </VBox>
+            </right>
+        </BorderPane>
+    </top>
+
+    <!-- Center-Bereich -->
+    <center>
+        <VBox spacing="20" alignment="CENTER">
+            <Label text="Dealer"/>
+            <HBox spacing="30" alignment="CENTER">
+                <Rectangle width="200" height="300"/>
+                <Rectangle width="200" height="300" fill="BLACK"/>
+            </HBox>
+            <HBox spacing="30" alignment="CENTER">
+                <ImageView fitHeight="200" fitWidth="300"
+                           image=""/>
+                <ImageView fitHeight="200" fitWidth="300"
+                           image=""/>
+            </HBox>
+                <Label text="Kartenwert"/>
+        </VBox>
+    </center>
+
+    <!-- Right-Bereich -->
+    <right>
+        <VBox spacing="10">
+
+
+        </VBox>
+    </right>
+</BorderPane>
+

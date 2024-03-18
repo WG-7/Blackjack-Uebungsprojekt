@@ -7,7 +7,7 @@ public class BlackjackManager {
     private ArrayList<Player> allPlayers;
     private ArrayList<Game> gameHistory;
     private static BlackjackManager instance;
-    public BlackjackManager(){
+    private BlackjackManager(){
         gameHistory = new ArrayList<>();
         allPlayers = new ArrayList<>();
         initilizeAndRunBlackjack();
