@@ -1,24 +1,57 @@
 package org.example;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BlackjackManager {
+    private Player player;
+    private ArrayList<Player> allPlayers;
+    private ArrayList<Game> gameHistory;
+    private static BlackjackManager instance;
     public BlackjackManager(){
-
+        gameHistory = new ArrayList<>();
+        allPlayers = new ArrayList<>();
+        initilizeAndRunBlackjack();
     }
 
-    public void initilizeGame(){
+    public void initilizeAndRunBlackjack(){
+        login();
+        Game game = new Game(player);
+        game.startAndExcuteGame();
+        gameHistory.add(game);
+    }
+    public void login(){
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Bitte geben Sie ihren Namen ein:");
+        System.out.println("Bitte geben Sie ihren Nutzernamen ein:");
         String namenEingabe = scanner.nextLine();
+        player = new Player(namenEingabe, 5000);
+        allPlayers.add(player);
 
-        System.out.println("Sie haben eingegeben: " + namenEingabe);
+        scanner.close();
+    }
+    public void reset(){
+        gameHistory.get(gameHistory.size()-1).endGame();
+        player.setBalance(5000);
+        Game game = new Game(player);
+        game.startAndExcuteGame();
+        gameHistory.add(game);
+    }
+    public void showTutorial(){
+        System.out.println("Platzhalter Tutorial");
+    }
 
-        System.out.println("Bitte geben Sie ihren Namen ein:");
-        namenEingabe = scanner.nextLine();
+    public ArrayList<Game> getGameHistory() {
+        return gameHistory;
+    }
 
-        System.out.println("Sie haben eingegeben: " + namenEingabe);
+    public void setGameHistory(ArrayList<Game> gameHistory) {
+        this.gameHistory = gameHistory;
+    }
 
-        scanner.close(); // Schließt den Scanner
+    public static BlackjackManager getInstance(){
+        if (instance == null) {
+            instance = new BlackjackManager();
+        }
+        return instance;
     }
 }
