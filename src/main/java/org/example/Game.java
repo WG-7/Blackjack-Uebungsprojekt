@@ -5,48 +5,57 @@ import java.util.ArrayList;
 public class Game {
 
     private Player player;
-    private ArrayList<ArrayList<Card>> playerHands;
-    private ArrayList<Card> dealerHand;
+    private ArrayList<Hand> playerHands;
     private int currentHand;
+    private Hand dealerHand;
 
     public Game(){
         playerHands = new ArrayList<>();
-        dealerHand = new ArrayList<>();
-        ArrayList<Card> hand0 = new ArrayList<>();
+        dealerHand = new Hand();
+        Hand hand0 = new Hand();
         playerHands.add(hand0);
         currentHand = 0;
     }
 
-    private void dealCard(){
-        playerHands.get(currentHand).add(getRandomCard());
-    }
-
-    private Card getRandomCard(){
+    public void startAndExcuteGame(){
 
     }
 
-    public void showHands(){
-        dealCard();
-        dealCard();
-        dealCard();
-        dealCard();
-        dealCard();
-        //second Hand
-        ArrayList<Card> hand1 = new ArrayList<>();
-        playerHands.add(hand1);
-        currentHand = 1;
-        dealCard();
-        dealCard();
-        dealCard();
+    private void setBet(){
 
-        for(int i=0;i<playerHands.size();i++)
-        {
-            System.out.print("Hand "+(i+1)+": \n");
-            for(int j=0;j<playerHands.get(i).size();j++)
-            {
-                System.out.print(playerHands.get(i).get(j)+", \n");
-            }
-            System.out.println();
-        }
+    }
+    private void dealStartingCards(){
+
+    }
+
+    private void hit(){
+
+    }
+    private void stand(){
+
+    }
+    private void doubleDown(){
+
+    }
+    private void split(){
+
+    }
+    private void insure(){
+
+    }
+
+    private void switchCurrentHand(){
+
+    }
+    private void startDealersTurn(){
+
+    }
+
+    private void payWinningHands(){
+
+    }
+
+    private void showHands(){
+
     }
 }

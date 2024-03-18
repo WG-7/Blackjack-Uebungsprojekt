@@ -8,7 +8,7 @@ public class Hand {
     private int bet;
 
     public Hand() {
-        cards = new ArrayList<Card>();
+        cards = new ArrayList<>();
     }
 
     private int getBet(){
@@ -19,23 +19,23 @@ public class Hand {
     }
 
     private int getHandValue(){
-
+        return 10;
     }
 
     private void addCard(){
 
     }
     private Card getRandomCard(){
-        CardSuit r_suit = CardSuit.values()[rand.nextInt(4)];
-        CardRank r_rank = CardRank.values()[rand.nextInt(13)];
-        return new Card(r_suit,r_rank);
+        CardSuit rSuit = CardSuit.values()[rand.nextInt(4)];
+        CardRank rRank = CardRank.values()[rand.nextInt(13)];
+        return new Card(rSuit,rRank);
     }
 
-    private bool isBust(){
-
+    private boolean isBust(){
+        return true;
     }
-    private bool isSplitAvailable(){
-
+    private boolean isSplitAvailable(){
+        return true;
     }
 
     @Override
