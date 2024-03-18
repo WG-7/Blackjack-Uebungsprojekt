@@ -19,7 +19,6 @@ public class Game {
         player = pPlayer;
         blackjackManager = BlackjackManager.getInstance();
     }
-
     public void startAndExcuteGame(){
         //am ende der methode:
         Game newGame = new Game(player);
