@@ -17,12 +17,19 @@ public class Hand {
     public void setBet(int pAmount){
         bet = pAmount;
     }
+    public int getSize(){
+        return cards.size();
+    }
 
     public int getHandValue(){
         int totalHandValue = 0;
         int amountOfAces = 0;
+        int arrayStartValue = 0;
+        if(bet == -1) { // dealersHand during Players turn
+            arrayStartValue = 1;
+        }
 
-        for(int i=0; i < cards.size();i++)
+        for(int i = arrayStartValue; i < getSize(); i++)
         {
             totalHandValue += cards.get(i).getValue();
             if(cards.get(i).getRank() == CardRank.ACE)
@@ -53,7 +60,7 @@ public class Hand {
     }
     public boolean isSplitAvailable(){
         //returns if 2 cards and equalValue
-        return cards.size() == 2 && cards.get(0).getValue() == cards.get(1).getValue();
+        return getSize() == 2 && cards.get(0).getValue() == cards.get(1).getValue();
     }
 
     public Card getCardAtIndex(int pIndex){
@@ -68,6 +75,19 @@ public class Hand {
 
     @Override
     public String toString() {
-        return "";
+        String cardsString = "";
+        int arrayStartValue = 0;
+        if(bet == -1) { // dealersHand during Players turn
+            arrayStartValue = 1;
+            cardsString = cardsString.concat("??, ");
+        }
+
+        for(int i = arrayStartValue ; i < getSize(); i++) {
+            cardsString = cardsString.concat(getCardAtIndex(i).toString());
+            if(i+1 < getSize()){
+                cardsString = cardsString.concat(", ");
+            }
+        }
+        return cardsString;
     }
 }
