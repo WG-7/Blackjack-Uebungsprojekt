@@ -2,7 +2,6 @@ package org.example;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 public class Game {
 
     private Player player;
@@ -16,7 +15,7 @@ public class Game {
         dealerHand = new Hand();
         Hand hand0 = new Hand();
         playerHands.add(hand0);
-        currentHand = 0;
+        currentHandIndex = 0;
         player = pPlayer;
         blackjackManager = BlackjackManager.getInstance();
     }
@@ -62,15 +61,30 @@ public class Game {
         playerHands.get(currentHandIndex+1).newCard();
     }
     private void insure(){
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Möchten Sie eine Versicherung abschließen?(y/n):");
-        String wantsInsure = scanner.nextLine();
-        if(wantsInsure.compareToIgnoreCase("y") == 0)
-        {
-            
-        }
+        // Ask for Insurance and Amount if wanted
+        Scanner scanner = new Scanner(System.in);
+        Boolean isValidAnswer = false;
+        Boolean isValidAmount = false;
+        do {
+            System.out.println("Möchten Sie eine Versicherung abschließen?(y/n):");
+            String wantsInsure = scanner.nextLine();
+            if(wantsInsure.compareToIgnoreCase("y") == 0) {
+                isValidAnswer = true;
+                do {
+                    System.out.println("Wie hoch soll die Versicherung sein?(maximal " + playerHands.get(currentHandIndex).getBet() + ") :");
+                    String insuranceAmount = scanner.nextLine();
+                    int insuranceAmountInt = Integer.parseInt(insuranceAmount);
+                    if (insuranceAmountInt > 0 && insuranceAmountInt <= playerHands.get(currentHandIndex).getBet()) {
+                        isValidAmount = true;
+                    }
+                } while (!isValidAmount);
+            }
+        } while (!isValidAnswer);
         scanner.close();
+
+        //Check for Dealer Blackjack
+        
     }
 
     private void endCurrentHand(){
