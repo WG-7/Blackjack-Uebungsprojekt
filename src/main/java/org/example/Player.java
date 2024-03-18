@@ -8,17 +8,17 @@ public class Player {
         balance = pBalance;
     }
 
-    private String getName(){
+    public String getName(){
         return name;
     }
-    private int getBalance(){
+    public int getBalance(){
         return balance;
     }
 
-    private void setName(String pName){
+    public void setName(String pName){
         name = pName;
     }
-    private void setBalance(int pBalance) {
+    public void setBalance(int pBalance) {
         balance = pBalance;
     }
 }
