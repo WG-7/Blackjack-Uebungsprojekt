@@ -41,15 +41,22 @@ public class Controller {
             child.setTranslateX(-translateX+standartRightShift);
         }
     }
-
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
-    }
     @FXML
     public void handleShowInstructions(ActionEvent actionEvent) {
     }
     @FXML
     public void handleResetGame(ActionEvent actionEvent) {
+    }
+
+    public void handleHit(ActionEvent actionEvent) {
+    }
+
+    public void handleStand(ActionEvent actionEvent) {
+    }
+
+    public void handleDoublee(ActionEvent actionEvent) {
+    }
+
+    public void handleSplit(ActionEvent actionEvent) {
     }
 }
