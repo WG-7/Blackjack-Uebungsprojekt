@@ -30,7 +30,7 @@ public class Game {
 //        newGame.startAndExcuteGame();
     }
 
-    private void setBet(int pAmount){
+    public void setBet(int pAmount){
         player.changeBalance(-pAmount);
         playerHands.get(currentHandIndex).setBet(pAmount);
     }
@@ -140,11 +140,20 @@ public class Game {
         }
     }
 
+    public int getPlayerHandSize(){
+        return playerHands.size();
+    }
+    public int getCurrentHandIndex(){
+        return currentHandIndex;
+    }
     public Hand getCurrenPlayerHand(){
         return playerHands.get(currentHandIndex);
     }
     public Hand getDealerHand(){
         return dealerHand;
+    }
+    public Player getPlayer(){
+        return player;
     }
 
     private void showHands(){

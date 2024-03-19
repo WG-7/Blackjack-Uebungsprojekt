@@ -13,3 +13,11 @@
 .button {
     -fx-font-size: 20px;
 }
+#cardBoxPlayer{
+    -fx-border-color: yellow;
+    -fx-border-width: 1px;
+}
+#cardBoxDealer {
+    -fx-border-color: yellow;
+    -fx-border-width: 1px;
+}

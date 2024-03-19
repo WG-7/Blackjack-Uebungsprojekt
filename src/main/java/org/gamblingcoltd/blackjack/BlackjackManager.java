@@ -21,11 +21,12 @@ public class BlackjackManager {
     public void login(){
         Scanner scanner = new Scanner(System.in);
 
-        /*System.out.println("Bitte geben Sie ihren Nutzernamen ein:");
-        String namenEingabe = scanner.nextLine();
-        player = new Player(namenEingabe, 5000);
+//        System.out.println("Bitte geben Sie ihren Nutzernamen ein:");
+//        String namenEingabe = scanner.nextLine();
+//        player = new Player(namenEingabe, 5000);
+        player = new Player("Malte", 5000);
         allPlayers.add(player);
-        */
+
         scanner.close();
     }
     public void reset(){

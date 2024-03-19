@@ -45,19 +45,36 @@
     <center>
         <VBox  spacing="20" alignment="CENTER">
             <Label text="Dealer"/>
+            <!--Dealer Cards-->
             <HBox spacing="30" alignment="CENTER">
-                <HBox alignment="CENTER_LEFT" fx:id="cardBoxDealer" maxHeight="290" maxWidth="1000" minHeight="290" minWidth="1000"/>
+                <VBox spacing="10" alignment="CENTER">
+                    <Label fx:id="cardValueDealer" text="Kartenwert: "/>
+                </VBox>
+                <HBox alignment="CENTER_LEFT" fx:id="cardBoxDealer" maxWidth="1000" minWidth="1000"/>
             </HBox>
-            <Button onMouseClicked="#setBet">Bet</Button>
-            <Button onMouseClicked="#drawCard">Draw</Button>
+
+            <HBox alignment="CENTER" spacing="10">
+                <Button onMouseClicked="#setBet">Bet</Button>
+                <Button alignment="CENTER" text="Hit" onAction="#handleHit" />
+                <Button alignment="CENTER" text="Stand" onAction="#handleStand" />
+                <Button alignment="CENTER" text="Double" onAction="#handleDouble" />
+                <Button alignment="CENTER" text="Split" onAction="#handleSplit" />
+                <Button alignment="CENTER" text="Insure" onAction="#handleInsure" />
+            </HBox>
+
+            <!--Player Cards-->
             <HBox alignment="CENTER">
                 <VBox spacing="10" alignment="CENTER">
-                    <Label text="Kartenwert"/>
-                    <Label text="Einsatz"/>
+                    <Label fx:id="handId" text="Hand 1 von 1"/>
+                    <Label fx:id="cardValuePlayer" text="Kartenwert: "/>
+                    <Label fx:id="bet" text="Einsatz: "/>
                 </VBox>
-                <HBox alignment="CENTER_LEFT" fx:id="cardBoxPlayer" maxHeight="290" maxWidth="1000" minHeight="290" minWidth="1000"/>
+                <HBox alignment="CENTER_LEFT" fx:id="cardBoxPlayer" maxWidth="1000" minWidth="1000"/>
             </HBox>
+
+            <!--Player Actions-->
             <HBox alignment="CENTER" spacing="10">
+                <Button onMouseClicked="#setBet">Bet</Button>
                 <Button alignment="CENTER" text="Hit" onAction="#handleHit" />
                 <Button alignment="CENTER" text="Stand" onAction="#handleStand" />
                 <Button alignment="CENTER" text="Double" onAction="#handleDouble" />
