@@ -14,14 +14,14 @@ public class Main extends Application {
         Parent root = fxmlLoader.load();
         Scene GameScene = new Scene(root);
 
-        FXMLLoader fxmlLoader2 = new FXMLLoader(Main.class.getResource("game_view.fxml"));
+        FXMLLoader fxmlLoader2 = new FXMLLoader(Main.class.getResource("betting_view.fxml"));
         Parent root2 = fxmlLoader2.load();
         Scene bettingScene = new Scene(root2);
 
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
         stage.setTitle("Blackjack");
-        stage.setScene(GameScene);
+        stage.setScene(bettingScene);
         stage.show();
     }
 
