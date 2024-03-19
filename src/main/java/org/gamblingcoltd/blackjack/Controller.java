@@ -12,7 +12,8 @@ import javafx.scene.layout.HBox;
 import java.util.Objects;
 
 public class Controller {
-    public HBox cardBox;
+    public HBox cardBoxPlayer;
+    public HBox cardBoxDealer;
     @FXML
     private Label welcomeText;
     private BlackjackManager blackjackManager;
@@ -34,8 +35,26 @@ public class Controller {
     }
 
     private void loadCards(){
-        cardBox.getChildren().clear();
+        cardBoxDealer.getChildren().clear();
 
+        //Player
+        Hand dealerHand = currentGame.getDealerHand();
+        for(int i = 0; i < dealerHand.getSize();i++)
+        {
+            String cardUrl = dealerHand.getCardAtIndex(i).getUrl();
+            System.out.println(cardUrl);
+            Image card = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/org/gamblingcoltd/blackjack/CardPNG/"+cardUrl)));
+            ImageView cardView = new ImageView(card);
+            cardView.setFitWidth(200);
+            cardView.setFitHeight(290.4);
+            cardView.setPreserveRatio(true);
+
+            cardBoxDealer.getChildren().add(cardView);
+        }
+        adjustCardPositions(cardBoxDealer);
+
+        //Player
+        cardBoxPlayer.getChildren().clear();
         Hand currentPlayerHand = currentGame.getCurrenPlayerHand();
         for(int i = 0; i < currentPlayerHand.getSize();i++)
         {
@@ -47,15 +66,17 @@ public class Controller {
             cardView.setFitHeight(290.4);
             cardView.setPreserveRatio(true);
 
-            cardBox.getChildren().add(cardView);
+            cardBoxPlayer.getChildren().add(cardView);
         }
-        adjustCardPositions();
+        adjustCardPositions(cardBoxPlayer);
     }
 
-    private void adjustCardPositions() {
-        double overlap = 160; // Ihr gewünschter Überlappungswert
+    private void adjustCardPositions(HBox pHBox) {
+        HBox cardBox = pHBox;
 
-        double standartRightShift = (cardBox.getChildren().size()/2.0)*100;
+        double overlap = 160; // Ihr gewünschter Überlappungswert
+        //(cardBoxPlayer width in px - px width of hand)/2
+        double standartRightShift = (cardBox.getWidth()-((cardBox.getChildren().size()*40)+overlap))/2;
 
         for (int i = 0; i < cardBox.getChildren().size(); i++) {
             Node child = cardBox.getChildren().get(i);

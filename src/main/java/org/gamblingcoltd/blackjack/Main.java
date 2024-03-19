@@ -10,11 +10,11 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("game_view.fxml"));
         Parent root = fxmlLoader.load();
 
         Scene scene = new Scene(root);
-        stage.setFullScreen(true);
+        stage.setFullScreen(false);
         stage.setFullScreenExitHint("");
         stage.setTitle("Blackjack");
         stage.setScene(scene);

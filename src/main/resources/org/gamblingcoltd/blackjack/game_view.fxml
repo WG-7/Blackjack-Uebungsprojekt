@@ -46,8 +46,7 @@
         <VBox  spacing="20" alignment="CENTER">
             <Label text="Dealer"/>
             <HBox spacing="30" alignment="CENTER">
-                <ImageView fx:id="imageplayer1" fitHeight="290" fitWidth="200"/>
-                <ImageView fx:id="imageplayer2" fitHeight="290" fitWidth="200"/>
+                <HBox alignment="CENTER_LEFT" fx:id="cardBoxDealer" maxHeight="290" maxWidth="1000" minHeight="290" minWidth="1000"/>
             </HBox>
             <Button onMouseClicked="#setBet">Bet</Button>
             <Button onMouseClicked="#drawCard">Draw</Button>
@@ -56,7 +55,7 @@
                     <Label text="Kartenwert"/>
                     <Label text="Einsatz"/>
                 </VBox>
-                <HBox alignment="CENTER_LEFT" fx:id="cardBox" minHeight="290" minWidth="1000" />
+                <HBox alignment="CENTER_LEFT" fx:id="cardBoxPlayer" maxHeight="290" maxWidth="1000" minHeight="290" minWidth="1000"/>
             </HBox>
 
 
