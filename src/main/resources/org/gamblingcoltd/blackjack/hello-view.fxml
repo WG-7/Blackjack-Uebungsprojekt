@@ -5,34 +5,42 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 
 <?import javafx.scene.image.ImageView?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamblingcoltd.blackjack.HelloController">
+<?import javafx.scene.layout.Region?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamblingcoltd.blackjack.Controller" stylesheets="@style.css">
 
     <!-- Top-Bereich -->
     <top>
         <BorderPane>
             <left>
                 <VBox>
+                    <Region minHeight="20" />
                     <HBox spacing="10">
-                        <Label text="Name"/>
-                        <Label fx:id="LbPlayerName"/>
+                        <Region minWidth="20" />
+                        <Label fx:id="LbPlayerName" text="Name"/>
                     </HBox>
                     <HBox spacing="10">
-                        <Label text="Guthaben"/>
-                        <Label fx:id="LbBalance"/>
+                        <Region minWidth="20" />
+                        <Label fx:id="LbBalance" text="Guthaben"/>
                     </HBox>
                     <HBox spacing="10">
-                        <Label text="Einsatz"/>
-                        <Label fx:id="LbBet"/>
+                        <Region minWidth="20" />
+                        <Label fx:id="LbBet" text="Einsatz"/>
                     </HBox>
                 </VBox>
             </left>
             <right>
-                <VBox alignment="CENTER">
-                    <Button alignment="CENTER_RIGHT" text="Reset" onAction="#handleResetGame" />
-                    <Button alignment="CENTER_RIGHT" text="Anleitung" onAction="#handleShowInstructions" />
+                <VBox alignment="CENTER" spacing="20">
+                    <Region minHeight="10" />
+                    <HBox alignment="CENTER">
+                        <Button alignment="CENTER" text="Reset" onAction="#handleResetGame" />
+                        <Region minWidth="20" />
+                    </HBox>
+                    <HBox alignment="CENTER">
+                        <Button alignment="CENTER" text="Anleitung" onAction="#handleShowInstructions" />
+                        <Region minWidth="20" />
+                    </HBox>
                 </VBox>
             </right>
         </BorderPane>
@@ -40,11 +48,11 @@
 
     <!-- Center-Bereich -->
     <center>
-        <VBox spacing="20" alignment="CENTER">
+        <VBox  spacing="20" alignment="CENTER">
             <Label text="Dealer"/>
             <HBox spacing="30" alignment="CENTER">
-                <Rectangle width="200" height="300"/>
-                <Rectangle width="200" height="300" fill="BLACK"/>
+                <ImageView fx:id="imageplayer1" fitHeight="290" fitWidth="200"/>
+                <ImageView fx:id="imageplayer2" fitHeight="290" fitWidth="200"/>
             </HBox>
             <HBox spacing="30" alignment="CENTER">
                 <ImageView fx:id="imagedealer1" fitHeight="290" fitWidth="200"/>

@@ -51,7 +51,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>org.gamblingcoltd.blackjack.HelloApplication</mainClass>
+                            <mainClass>org.gamblingcoltd.blackjack.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -73,7 +73,7 @@
                     <execution>
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>org.gamblingcoltd.blackjack.HelloApplication</mainClass>
+                            <mainClass>org.gamblingcoltd.blackjack.Main</mainClass>
                         </configuration>
                     </execution>
                 </executions>
