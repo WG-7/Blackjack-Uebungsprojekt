@@ -143,6 +143,9 @@ public class Game {
     public Hand getCurrenPlayerHand(){
         return playerHands.get(currentHandIndex);
     }
+    public Hand getDealerHand(){
+        return dealerHand;
+    }
 
     private void showHands(){
         System.out.println("--------------------------------------------------------------------");
