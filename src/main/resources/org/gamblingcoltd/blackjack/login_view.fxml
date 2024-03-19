@@ -7,5 +7,12 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamblingcoltd.blackjack.Controller" stylesheets="@style.css">
-
+    <center>
+        <VBox alignment="CENTER" spacing="30">
+            <Label text="NUTZERNAME:" style="-fx-font-size: 50px;"/>
+            <TextField style="-fx-font-size: 50px;" maxWidth="300"/>
+            <Region minHeight="350"/>
+            <Button text="WEITER" style="-fx-font-size: 50px;"/>
+        </VBox>
+    </center>
 </BorderPane>
