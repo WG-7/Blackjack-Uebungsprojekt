@@ -9,7 +9,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Region?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamblingcoltd.blackjack.Controller" stylesheets="@style.css">
-
     <!-- Top-Bereich -->
     <top>
         <BorderPane>
@@ -54,9 +53,16 @@
                 <ImageView fx:id="imageplayer1" fitHeight="290" fitWidth="200"/>
                 <ImageView fx:id="imageplayer2" fitHeight="290" fitWidth="200"/>
             </HBox>
-            <HBox spacing="30" alignment="CENTER">
-                <ImageView fx:id="imagedealer1" fitHeight="290" fitWidth="200"/>
-                <ImageView fx:id="imagedealer2" fitHeight="290" fitWidth="200"/>
+
+            <Button onMouseClicked="#drawCard">Draw</Button>
+            <HBox spacing="30" alignment="CENTER" fx:id="cardBox">
+<!--                <ImageView fitHeight="290" fitWidth="200">-->
+<!--                    <Image url="@CardPNG/7_of_clubs.png"/>-->
+<!--                </ImageView>-->
+<!--                <ImageView fitHeight="290" fitWidth="200">-->
+<!--&lt;!&ndash;                    //1,452&ndash;&gt;-->
+<!--                    <Image url="@CardPNG/ace_of_clubs.png"/>-->
+<!--                </ImageView>-->
             </HBox>
                 <Label text="Kartenwert"/>
         </VBox>
