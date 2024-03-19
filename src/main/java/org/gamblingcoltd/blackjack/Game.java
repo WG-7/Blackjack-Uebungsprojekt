@@ -23,24 +23,7 @@ public class Game {
         blackjackManager = BlackjackManager.getInstance();
     }
     public void startAndExcuteGame(){
-        showHands();
-        setBet(10);
         dealStartingCards();
-        showHands();
-        split();
-        showHands();
-
-        //double down first hand
-        doubleDown();
-        showHands();
-
-        //hit and stand second hand
-        hit();
-        showHands();
-        stand();
-
-        showHands();
-
         //am ende der methode:
 //        Game newGame = new Game(player);
 //        blackjackManager.getGameHistory().add(newGame);
@@ -60,13 +43,13 @@ public class Game {
         dealerHand.newCard();
     }
 
-    private void hit(){
+    public void hit(){
         playerHands.get(currentHandIndex).newCard();
     }
-    private void stand(){
+    public void stand(){
         endCurrentHand();
     }
-    private void doubleDown(){
+    public void doubleDown(){
         int currentHandBet = playerHands.get(currentHandIndex).getBet();
 
         player.changeBalance(-currentHandBet);
@@ -75,7 +58,7 @@ public class Game {
 
         endCurrentHand();
     }
-    private void split(){
+    public void split(){
         //get second card
         Card splitCard = playerHands.get(currentHandIndex).getCardAtIndex(1);
         playerHands.get(currentHandIndex).removeCardAtIndex(1);
@@ -91,7 +74,7 @@ public class Game {
         playerHands.get(currentHandIndex).newCard();
         playerHands.get(currentHandIndex+1).newCard();
     }
-    private void insure(){
+    public void insure(){
         // Ask for InsureanceAmount
         Scanner scanner = new Scanner(System.in);
         Boolean isValidAmount = false;
@@ -155,6 +138,10 @@ public class Game {
                 player.changeBalance(playerHands.get(i).getBet());                      //push (pay bet back)
             }
         }
+    }
+
+    public Hand getCurrenPlayerHand(){
+        return playerHands.get(currentHandIndex);
     }
 
     private void showHands(){

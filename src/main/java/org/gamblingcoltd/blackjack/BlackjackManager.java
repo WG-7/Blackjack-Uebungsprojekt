@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class BlackjackManager {
     private Player player;
     private ArrayList<Player> allPlayers;
-    private ArrayList<Game> gameHistory;
+    public ArrayList<Game> gameHistory;
     private final static BlackjackManager instance = new BlackjackManager();
     private BlackjackManager(){
         gameHistory = new ArrayList<>();

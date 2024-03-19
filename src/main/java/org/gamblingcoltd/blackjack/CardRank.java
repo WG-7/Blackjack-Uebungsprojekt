@@ -14,9 +14,9 @@ public enum CardRank {
     JACK("Jack", "J", 10),
     QUEEN("Queen", "Q", 10),
     KING("King", "K", 10);
-    String name;
-    String shortName;
-    int value;
+    public final String name;
+    public final String shortName;
+    public final int value;
 
     CardRank(String pName, String pShortName, int pValue) {
         name = pName;

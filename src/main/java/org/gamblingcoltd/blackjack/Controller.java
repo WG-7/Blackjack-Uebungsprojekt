@@ -15,18 +15,40 @@ public class Controller {
     public HBox cardBox;
     @FXML
     private Label welcomeText;
+    private BlackjackManager blackjackManager;
+    private Game currentGame;
 
-    private int testCounter = 1;
+    public Controller(){
+        blackjackManager = BlackjackManager.getInstance();
+        blackjackManager.initilizeAndRunBlackjack();
+        currentGame = blackjackManager.gameHistory.get(blackjackManager.gameHistory.size()-1);
+    }
 
+    public void setBet(){
+        currentGame.getCurrenPlayerHand().setBet(10);
+        loadCards();
+    }
     public void drawCard(MouseEvent actionEvent) {
-        testCounter++;
-        Image card = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/org/gamblingcoltd/blackjack/CardPNG/"+testCounter+"_of_hearts.png")));
-        ImageView cardView = new ImageView(card);
-        cardView.setFitWidth(200);
-        cardView.setFitHeight(290.4);
-        cardView.setPreserveRatio(true);
+        currentGame.hit();
+        loadCards();
+    }
 
-        cardBox.getChildren().add(cardView);
+    private void loadCards(){
+        cardBox.getChildren().clear();
+
+        Hand currentPlayerHand = currentGame.getCurrenPlayerHand();
+        for(int i = 0; i < currentPlayerHand.getSize();i++)
+        {
+            String cardUrl = currentPlayerHand.getCardAtIndex(i).getUrl();
+            System.out.println(cardUrl);
+            Image card = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/org/gamblingcoltd/blackjack/CardPNG/"+cardUrl)));
+            ImageView cardView = new ImageView(card);
+            cardView.setFitWidth(200);
+            cardView.setFitHeight(290.4);
+            cardView.setPreserveRatio(true);
+
+            cardBox.getChildren().add(cardView);
+        }
         adjustCardPositions();
     }
 

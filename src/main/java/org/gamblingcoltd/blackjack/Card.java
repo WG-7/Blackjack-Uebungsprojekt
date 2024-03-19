@@ -19,6 +19,10 @@ public class Card {
         return rank.value;
     }
 
+    public String getUrl(){
+        return rank.shortName+"_of_"+suit.name+".png";
+    }
+
     @Override
     public String toString() {
         return suit+rank.shortName;

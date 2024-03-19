@@ -49,7 +49,7 @@
                 <ImageView fx:id="imageplayer1" fitHeight="290" fitWidth="200"/>
                 <ImageView fx:id="imageplayer2" fitHeight="290" fitWidth="200"/>
             </HBox>
-
+            <Button onMouseClicked="#setBet">Bet</Button>
             <Button onMouseClicked="#drawCard">Draw</Button>
             <HBox alignment="CENTER">
                 <VBox spacing="10" alignment="CENTER">
