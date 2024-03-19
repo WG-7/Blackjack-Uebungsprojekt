@@ -10,14 +10,18 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("game_view.fxml"));
         Parent root = fxmlLoader.load();
+        Scene GameScene = new Scene(root);
 
-        Scene scene = new Scene(root);
+        FXMLLoader fxmlLoader2 = new FXMLLoader(Main.class.getResource("game_view.fxml"));
+        Parent root2 = fxmlLoader2.load();
+        Scene bettingScene = new Scene(root2);
+
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
         stage.setTitle("Blackjack");
-        stage.setScene(scene);
+        stage.setScene(GameScene);
         stage.show();
     }
 

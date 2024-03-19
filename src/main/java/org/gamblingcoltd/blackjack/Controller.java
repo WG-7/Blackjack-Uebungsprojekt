@@ -17,7 +17,6 @@ public class Controller {
     private Label welcomeText;
     private BlackjackManager blackjackManager;
     private Game currentGame;
-
     public Controller(){
         blackjackManager = BlackjackManager.getInstance();
         blackjackManager.initilizeAndRunBlackjack();
@@ -76,9 +75,12 @@ public class Controller {
     public void handleStand(ActionEvent actionEvent) {
     }
 
-    public void handleDoublee(ActionEvent actionEvent) {
+    public void handleDouble(ActionEvent actionEvent) {
     }
 
     public void handleSplit(ActionEvent actionEvent) {
+    }
+
+    public void handleInsure(ActionEvent actionEvent) {
     }
 }
