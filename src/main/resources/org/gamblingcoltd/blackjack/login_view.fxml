@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamblingcoltd.blackjack.Game_Controller" stylesheets="@style.css">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamblingcoltd.blackjack.Login_Controller" stylesheets="@style.css">
     <center>
         <VBox alignment="CENTER" spacing="30">
             <Label text="NUTZERNAME:" style="-fx-font-size: 50px;"/>

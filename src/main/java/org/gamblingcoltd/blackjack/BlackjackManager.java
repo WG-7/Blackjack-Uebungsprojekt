@@ -18,17 +18,17 @@ public class BlackjackManager {
         game.startAndExcuteGame();
         gameHistory.add(game);
     }
-    public void login(String username){
+    public void login(String pUsername){
         for(Player searchedPlayer : allPlayers){
             if (this.player == null) {
                 continue;
             }
-            if(player.getName().equals(username)){
+            if(player.getName().equals(pUsername)){
                 player = searchedPlayer;
                 return;
             }
         }
-        Player newPlayer = new Player(username, 1000);
+        Player newPlayer = new Player(pUsername, 5000);
         allPlayers.add(newPlayer);
         player = newPlayer;
     }

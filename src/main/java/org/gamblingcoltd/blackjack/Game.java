@@ -48,6 +48,11 @@ public class Game {
         player.changeBalance(-pAmount);
         playerHands.get(currentHandIndex).setBet(pAmount);
     }
+    public void increaseBet(int pAmount)
+    {
+        player.changeBalance(-pAmount);
+        playerHands.get(currentHandIndex).setBet(playerHands.get(currentHandIndex).getBet() + pAmount);
+    }
     public boolean isInsureAvailable(){
         return dealerHand.getCardAtIndex(1).getRank()==CardRank.ACE && getCurrenPlayerHand().getSize() == 2;
     }
