@@ -13,25 +13,12 @@ import javafx.stage.Screen;
 import java.util.*;
 
 public class Game_Controller implements GameUpdateListener{
-    public Label LbBalance;
-    public Label LbPlayerName;
-    public HBox cardBoxPlayer;
-    public HBox cardBoxDealer;
-    public Label cardValueDealer;
-    public Label handId;
-    public Label cardValuePlayer;
-    public Label bet;
-
     @FXML
-    private Button hitButton;
+    public Label LbBalance, cardValueDealer, cardValuePlayer, bet, LbPlayerName, handId;
     @FXML
-    private Button standButton;
+    public HBox cardBoxPlayer, cardBoxDealer;
     @FXML
-    private Button doubleButton;
-    @FXML
-    private Button splitButton;
-    @FXML
-    private Button insureButton;
+    private Button hitButton, standButton, doubleButton, splitButton, insureButton;
 
     private BlackjackManager blackjackManager;
     private Game currentGame;
@@ -44,6 +31,9 @@ public class Game_Controller implements GameUpdateListener{
     }
     @Override
     public void updateUI() {
+        loadUI();
+    }
+    public void initialize() {
         loadUI();
     }
 
