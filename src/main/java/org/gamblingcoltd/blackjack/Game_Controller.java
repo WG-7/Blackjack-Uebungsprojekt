@@ -2,27 +2,17 @@ package org.gamblingcoltd.blackjack;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.util.*;
 
-public class Game_Controller {
-    private Stage mainStage;
-    private Scene bettingScene, loginScene, gameScene;
-    private Map<Button, Integer> betButtons;
+public class Game_Controller implements GameUpdateListener{
     public Label LbBalance;
     public Label LbPlayerName;
     public HBox cardBoxPlayer;
@@ -31,10 +21,7 @@ public class Game_Controller {
     public Label handId;
     public Label cardValuePlayer;
     public Label bet;
-    public TextField TfUsername;
 
-    @FXML
-    private Button betButton;
     @FXML
     private Button hitButton;
     @FXML
@@ -50,16 +37,26 @@ public class Game_Controller {
     private Game currentGame;
     public Game_Controller(){
         blackjackManager = BlackjackManager.getInstance();
+        blackjackManager.login("Malte");
+        blackjackManager.initilizeAndRunBlackjack();
         currentGame = blackjackManager.gameHistory.get(blackjackManager.gameHistory.size()-1);
+        currentGame.setUpdateListener(this);
     }
-    private void initialize() {
+    @Override
+    public void updateUI() {
         loadUI();
     }
+
     @FXML
     public void handleShowInstructions(ActionEvent actionEvent) {
     }
     @FXML
     public void handleResetGame(ActionEvent actionEvent) {
+        System.out.println("Rest");
+        blackjackManager.reset();
+        blackjackManager.initilizeAndRunBlackjack();
+        currentGame = blackjackManager.gameHistory.get(blackjackManager.gameHistory.size()-1);
+        currentGame.setUpdateListener(this);
     }
     @FXML
     public void handleBet(){
@@ -70,27 +67,22 @@ public class Game_Controller {
     @FXML
     public void handleHit(ActionEvent actionEvent) {
         currentGame.hit();
-        loadUI();
     }
     @FXML
     public void handleStand(ActionEvent actionEvent) {
         currentGame.stand();
-        loadUI();
     }
     @FXML
     public void handleDouble(ActionEvent actionEvent) {
         currentGame.doubleDown();
-        loadUI();
     }
     @FXML
     public void handleSplit(ActionEvent actionEvent) {
         currentGame.split();
-        loadUI();
     }
     @FXML
     public void handleInsure(ActionEvent actionEvent) {
         currentGame.insure();
-        loadUI();
     }
 
     private void loadUI(){

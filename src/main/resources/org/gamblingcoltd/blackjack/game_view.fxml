@@ -17,7 +17,7 @@
                     <Region minHeight="20" />
                     <HBox spacing="10">
                         <Region minWidth="20" />
-                        <Label fx:id="LbBetScreenPlayerName" text="Name"/>
+                        <Label fx:id="LbPlayerName" text="Name"/>
                     </HBox>
                     <HBox spacing="10">
                         <Region minWidth="20" />

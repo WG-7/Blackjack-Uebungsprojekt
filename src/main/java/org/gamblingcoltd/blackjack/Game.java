@@ -9,6 +9,7 @@ public class Game {
     private int currentHandIndex;
     private Hand dealerHand;
     private BlackjackManager blackjackManager;
+    private GameUpdateListener updateListener;
 
     public Game(Player pPlayer){
         playerHands = new ArrayList<>();
@@ -22,6 +23,11 @@ public class Game {
         player = pPlayer;
         blackjackManager = BlackjackManager.getInstance();
     }
+
+    public void setUpdateListener(GameUpdateListener listener) {
+        this.updateListener = listener;
+    }
+
     public void startAndExcuteGame(){
         //am ende der methode:
 //        Game newGame = new Game(player);
@@ -67,6 +73,9 @@ public class Game {
 
     public void hit(){
         playerHands.get(currentHandIndex).newCard();
+        if (updateListener != null) {
+            updateListener.updateUI();
+        }
         if(playerHands.get(currentHandIndex).getHandValue()>=21){
             playerHands.get(currentHandIndex).setHandFinalised();
             endCurrentHand();
@@ -81,6 +90,10 @@ public class Game {
         player.changeBalance(-currentHandBet);
         playerHands.get(currentHandIndex).setBet(currentHandBet*2);
         playerHands.get(currentHandIndex).newCard();
+
+        if (updateListener != null) {
+            updateListener.updateUI();
+        }
 
         if(playerHands.get(currentHandIndex).getHandValue()>=21){
             playerHands.get(currentHandIndex).setHandFinalised();
@@ -97,12 +110,16 @@ public class Game {
         Hand hand1 = new Hand();
         playerHands.add(hand1);
         player.changeBalance(-playerHands.get(currentHandIndex).getBet());
-        playerHands.get(currentHandIndex+1).setBet(playerHands.get(currentHandIndex).getBet());
-        playerHands.get(currentHandIndex+1).addCardToHand(splitCard);
+        playerHands.get(playerHands.size()-1).setBet(playerHands.get(currentHandIndex).getBet());
+        playerHands.get(playerHands.size()-1).addCardToHand(splitCard);
 
         //draw for both hands
         playerHands.get(currentHandIndex).newCard();
-        playerHands.get(currentHandIndex+1).newCard();
+        playerHands.get(playerHands.size()-1).newCard();
+
+        if (updateListener != null) {
+            updateListener.updateUI();
+        }
     }
     public void insure(){
         // Ask for InsureanceAmount
@@ -132,6 +149,9 @@ public class Game {
         getCurrenPlayerHand().setHandFinalised();
         if(playerHands.size() >= (currentHandIndex+1)+1) {
             currentHandIndex++;
+            if (updateListener != null) {
+                updateListener.updateUI();
+            }
         }
         else {
             startDealersTurn();
@@ -142,6 +162,9 @@ public class Game {
         showHands();
         while (dealerHand.getHandValue()<17) {
             dealerHand.newCard();
+            if (updateListener != null) {
+                updateListener.updateUI();
+            }
         }
         payWinningHands();
     }
@@ -172,6 +195,8 @@ public class Game {
             } else if (currentHand.getHandValue() == dealerHand.getHandValue()) {
                 System.out.println("(Push) Payed back "+playerHands.get(i).getBet()*1.5);
                 player.changeBalance(playerHands.get(i).getBet());                      //push (pay bet back)
+            } else {
+                System.out.println("LOST");
             }
         }
     }
