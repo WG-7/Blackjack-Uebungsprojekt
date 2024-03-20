@@ -40,7 +40,7 @@ public class Game_Controller implements GameUpdateListener{
     }
     @Override
     public void printWinMessage(double pAmount, int pHandIndex, String pMessage) {
-        Alert alert = new Alert(Alert.AlertType.NONE);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Payout Info");
         alert.setHeaderText(pMessage);
         if(pMessage.equals("Insurance Lost")) {
@@ -60,7 +60,7 @@ public class Game_Controller implements GameUpdateListener{
 
     public void initialize() {
         currentGame.dealStartingCards();
-        PauseTransition pause = new PauseTransition(Duration.seconds(0.1)); 
+        PauseTransition pause = new PauseTransition(Duration.seconds(0.1));
         pause.setOnFinished(event -> {
             loadUI();
         });
@@ -73,9 +73,12 @@ public class Game_Controller implements GameUpdateListener{
     }
     @FXML
     public void handleResetGame(ActionEvent actionEvent) throws IOException {
-        //set back bet
-        int amount = blackjackManager.getGameHistory().get(blackjackManager.getGameHistory().size()-1).getCurrenPlayerHand().getBet();
-        blackjackManager.getGameHistory().get(blackjackManager.getGameHistory().size()-1).increaseBet(-amount);
+        //set back bet if Hand was not finalised
+        Hand currentHand = blackjackManager.getGameHistory().get(blackjackManager.getGameHistory().size()-1).getCurrenPlayerHand();
+        if(!currentHand.getHandFinalised()) {
+            int amount = currentHand.getBet();
+            blackjackManager.getGameHistory().get(blackjackManager.getGameHistory().size()-1).increaseBet(-amount);
+        }
         //load new game
         blackjackManager.beginNewGame();
 
