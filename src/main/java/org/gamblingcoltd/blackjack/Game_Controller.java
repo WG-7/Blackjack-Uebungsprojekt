@@ -2,27 +2,36 @@ package org.gamblingcoltd.blackjack;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
-import java.util.Objects;
+import javafx.stage.Stage;
 
-public class Controller {
-    public Label LbPlayerName;
+import java.io.IOException;
+import java.util.*;
+
+public class Game_Controller {
+    private Stage mainStage;
+    private Scene bettingScene, loginScene, gameScene;
+    private Map<Button, Integer> betButtons;
     public Label LbBalance;
-
+    public Label LbPlayerName;
     public HBox cardBoxPlayer;
     public HBox cardBoxDealer;
     public Label cardValueDealer;
     public Label handId;
     public Label cardValuePlayer;
     public Label bet;
-
+    public TextField TfUsername;
 
     @FXML
     private Button betButton;
@@ -39,15 +48,28 @@ public class Controller {
 
     private BlackjackManager blackjackManager;
     private Game currentGame;
-    public Controller(){
+    public Button chipValue10;
+    public Button chipValue25;
+    public Button chipValue50;
+    public Button chipValue100;
+    public Button chipValue500;
+    public Label LbBetScreenPlayerName;
+    public Label LbBettingBalance;
+    public Game_Controller(){
         blackjackManager = BlackjackManager.getInstance();
         blackjackManager.initilizeAndRunBlackjack();
         currentGame = blackjackManager.gameHistory.get(blackjackManager.gameHistory.size()-1);
+
+        betButtons = new HashMap<>();
+        betButtons.put(chipValue10, 10);
+        betButtons.put(chipValue25, 25);
+        betButtons.put(chipValue50, 50);
+        betButtons.put(chipValue100, 100);
+        betButtons.put(chipValue500, 500);
     }
     private void initialize() {
         loadUI();
     }
-
     @FXML
     public void handleShowInstructions(ActionEvent actionEvent) {
     }
@@ -92,7 +114,7 @@ public class Controller {
         loadCards();
 
         //Name and Balance
-        LbPlayerName.setText(currentGame.getPlayer().getName());
+        LbBetScreenPlayerName.setText(currentGame.getPlayer().getName());
         LbBalance.setText(""+currentGame.getPlayer().getBalance());
 
         // Label PlayerHand
@@ -183,5 +205,59 @@ public class Controller {
             double translateX = i * 100;
             child.setTranslateX(-translateX+standartRightShift);
         }
+    }
+
+    public void handleLogin(ActionEvent actionEvent) throws IOException {
+        blackjackManager.login(TfUsername.getText());
+
+        Parent newRoot = FXMLLoader.load(getClass().getResource("betting_view.fxml"));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene currentScene = stage.getScene();
+        currentScene.setRoot(newRoot);
+    }
+
+    public void handleChipValue10(ActionEvent actionEvent) {
+        addBetAndUpdateUI(10);
+    }
+
+    public void handleChipValue25(ActionEvent actionEvent) {
+        addBetAndUpdateUI(25);
+    }
+
+    public void handleChipValue50(ActionEvent actionEvent) {
+        addBetAndUpdateUI(50);
+    }
+
+    public void handleChipValue100(ActionEvent actionEvent) {
+        addBetAndUpdateUI(100);
+    }
+
+    public void handleChipValue500(ActionEvent actionEvent) {
+        addBetAndUpdateUI(500);
+    }
+    public void addBetAndUpdateUI(int amount){
+        blackjackManager.getGameHistory().get(blackjackManager.getGameHistory().size()-1).setBet(amount);
+        updateBettingUI();
+    }
+    public void updateBettingUI(){
+        deactivateButtonsWithTooHighValue();
+        LbBetScreenPlayerName.setText("Name: " + blackjackManager.getPlayer().getName());
+        LbBettingBalance.setText("Guthaben: " + blackjackManager.getPlayer().getBalance());
+    }
+    public void deactivateButtonsWithTooHighValue(){
+        double playerBalance = blackjackManager.getPlayer().getBalance();
+        Set<Button> keys = betButtons.keySet();
+        boolean disable = false;
+        for (Button key : keys) {
+            if(key == null) continue;
+            if(playerBalance < betButtons.get(key)){
+                disable = true;
+            }
+            key.setDisable(disable);
+        }
+    }
+
+    public void handleAllIn(ActionEvent actionEvent) {
+        addBetAndUpdateUI((int) blackjackManager.getPlayer().getBalance());
     }
 }

@@ -8,7 +8,7 @@
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Region?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamblingcoltd.blackjack.Controller" stylesheets="@style.css">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.gamblingcoltd.blackjack.Game_Controller" stylesheets="@style.css">
     <!-- Top-Bereich -->
     <top>
         <BorderPane>
@@ -17,7 +17,7 @@
                     <Region minHeight="20" />
                     <HBox spacing="10">
                         <Region minWidth="20" />
-                        <Label fx:id="LbPlayerName" text="Name"/>
+                        <Label fx:id="LbBetScreenPlayerName" text="Name"/>
                     </HBox>
                     <HBox spacing="10">
                         <Region minWidth="20" />

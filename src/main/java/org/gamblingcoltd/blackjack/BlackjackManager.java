@@ -1,4 +1,5 @@
 package org.gamblingcoltd.blackjack;
+import java.net.UnknownServiceException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,21 +14,23 @@ public class BlackjackManager {
     }
 
     public void initilizeAndRunBlackjack(){
-        login();
         Game game = new Game(player);
         game.startAndExcuteGame();
         gameHistory.add(game);
     }
-    public void login(){
-        Scanner scanner = new Scanner(System.in);
-
-//        System.out.println("Bitte geben Sie ihren Nutzernamen ein:");
-//        String namenEingabe = scanner.nextLine();
-//        player = new Player(namenEingabe, 5000);
-        player = new Player("Malte", 5000);
-        allPlayers.add(player);
-
-        scanner.close();
+    public void login(String username){
+        for(Player searchedPlayer : allPlayers){
+            if (this.player == null) {
+                continue;
+            }
+            if(player.getName().equals(username)){
+                player = searchedPlayer;
+                return;
+            }
+        }
+        Player newPlayer = new Player(username, 1000);
+        allPlayers.add(newPlayer);
+        player = newPlayer;
     }
     public void reset(){
         gameHistory.get(gameHistory.size()-1).endGame();
@@ -46,6 +49,15 @@ public class BlackjackManager {
 
     public void setGameHistory(ArrayList<Game> gameHistory) {
         this.gameHistory = gameHistory;
+    }
+    public void setPlayer(Player pPlayer){
+        player = pPlayer;
+    }
+    public Player getPlayer(){
+        return player;
+    }
+    public ArrayList<Player> getAllPlayers(){
+        return allPlayers;
     }
 
     public static BlackjackManager getInstance(){

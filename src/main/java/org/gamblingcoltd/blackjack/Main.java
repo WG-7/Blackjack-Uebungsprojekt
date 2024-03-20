@@ -8,19 +8,21 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application {
+    private Stage stage;
+    Scene gameScene;
+    Scene bettingScene;
+    Scene loginScene;
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage pStage) throws IOException {
+        stage = pStage;
+
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("game_view.fxml"));
         Parent root = fxmlLoader.load();
         Scene gameScene = new Scene(root);
 
-        FXMLLoader fxmlLoader2 = new FXMLLoader(Main.class.getResource("betting_view.fxml"));
+        FXMLLoader fxmlLoader2 = new FXMLLoader(Main.class.getResource("login_view.fxml"));
         Parent root2 = fxmlLoader2.load();
-        Scene bettingScene = new Scene(root2);
-
-        FXMLLoader fxmlLoader3 = new FXMLLoader(Main.class.getResource("login_view.fxml"));
-        Parent root3 = fxmlLoader3.load();
-        Scene loginScene = new Scene(root3);
+        Scene loginScene = new Scene(root2);
 
         stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
@@ -31,5 +33,21 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch();
+    }
+
+    public Scene getBettingScene() {
+        return bettingScene;
+    }
+
+    public Scene getGameScene() {
+        return gameScene;
+    }
+
+    public Scene getLoginScene() {
+        return loginScene;
+    }
+
+    public Stage getStage() {
+        return stage;
     }
 }
