@@ -43,28 +43,19 @@
 
     <!-- Center-Bereich -->
     <center>
-        <VBox  spacing="20" alignment="CENTER">
+        <VBox spacing="20" alignment="CENTER">
             <Label text="Dealer"/>
             <!--Dealer Cards-->
             <HBox spacing="30" alignment="CENTER">
-                <VBox spacing="10" alignment="CENTER">
+                <VBox alignment="CENTER" minWidth="200">
                     <Label fx:id="cardValueDealer" text="Kartenwert: "/>
                 </VBox>
                 <HBox alignment="CENTER_LEFT" fx:id="cardBoxDealer" maxWidth="1000" minWidth="1000"/>
             </HBox>
 
-            <HBox alignment="CENTER" spacing="10">
-                <Button onMouseClicked="#setBet">Bet</Button>
-                <Button alignment="CENTER" text="Hit" onAction="#handleHit" />
-                <Button alignment="CENTER" text="Stand" onAction="#handleStand" />
-                <Button alignment="CENTER" text="Double" onAction="#handleDouble" />
-                <Button alignment="CENTER" text="Split" onAction="#handleSplit" />
-                <Button alignment="CENTER" text="Insure" onAction="#handleInsure" />
-            </HBox>
-
             <!--Player Cards-->
-            <HBox alignment="CENTER">
-                <VBox spacing="10" alignment="CENTER">
+            <HBox spacing="30" alignment="CENTER">
+                <VBox spacing="10" alignment="CENTER" minWidth="200">
                     <Label fx:id="handId" text="Hand 1 von 1"/>
                     <Label fx:id="cardValuePlayer" text="Kartenwert: "/>
                     <Label fx:id="bet" text="Einsatz: "/>
@@ -74,12 +65,12 @@
 
             <!--Player Actions-->
             <HBox alignment="CENTER" spacing="10">
-                <Button onMouseClicked="#setBet">Bet</Button>
-                <Button alignment="CENTER" text="Hit" onAction="#handleHit" />
-                <Button alignment="CENTER" text="Stand" onAction="#handleStand" />
-                <Button alignment="CENTER" text="Double" onAction="#handleDouble" />
-                <Button alignment="CENTER" text="Split" onAction="#handleSplit" />
-                <Button alignment="CENTER" text="Insure" onAction="#handleInsure" />
+                <Button fx:id="betButton" alignment="CENTER" text="Bet" onAction="#handleBet"/>
+                <Button fx:id="hitButton" alignment="CENTER" text="Hit" onAction="#handleHit"/>
+                <Button fx:id="standButton" alignment="CENTER" text="Stand" onAction="#handleStand"/>
+                <Button fx:id="doubleButton" alignment="CENTER" text="Double" onAction="#handleDouble"/>
+                <Button fx:id="splitButton" alignment="CENTER" text="Split" onAction="#handleSplit"/>
+                <Button fx:id="insureButton" alignment="CENTER" text="Insure" onAction="#handleInsure"/>
             </HBox>
 
         </VBox>

@@ -23,19 +23,36 @@ public class Game {
         blackjackManager = BlackjackManager.getInstance();
     }
     public void startAndExcuteGame(){
-        dealStartingCards();
         //am ende der methode:
 //        Game newGame = new Game(player);
 //        blackjackManager.getGameHistory().add(newGame);
 //        newGame.startAndExcuteGame();
     }
 
+    public Player getPlayer(){
+        return player;
+    }
+    public int getPlayerHandSize(){
+        return playerHands.size();
+    }
+    public int getCurrentHandIndex(){
+        return currentHandIndex;
+    }
+    public Hand getCurrenPlayerHand(){
+        return playerHands.get(currentHandIndex);
+    }
+    public Hand getDealerHand(){
+        return dealerHand;
+    }
     public void setBet(int pAmount){
         player.changeBalance(-pAmount);
         playerHands.get(currentHandIndex).setBet(pAmount);
     }
+    public boolean isInsureAvailable(){
+        return dealerHand.getCardAtIndex(1).getRank()==CardRank.ACE && getCurrenPlayerHand().getSize() == 2;
+    }
 
-    private void dealStartingCards(){
+    public void dealStartingCards(){
         playerHands.get(0).newCard();
         playerHands.get(0).newCard();
 
@@ -45,6 +62,10 @@ public class Game {
 
     public void hit(){
         playerHands.get(currentHandIndex).newCard();
+        if(playerHands.get(currentHandIndex).getHandValue()>=21){
+            playerHands.get(currentHandIndex).setHandFinalised();
+            endCurrentHand();
+        }
     }
     public void stand(){
         endCurrentHand();
@@ -55,6 +76,10 @@ public class Game {
         player.changeBalance(-currentHandBet);
         playerHands.get(currentHandIndex).setBet(currentHandBet*2);
         playerHands.get(currentHandIndex).newCard();
+
+        if(playerHands.get(currentHandIndex).getHandValue()>=21){
+            playerHands.get(currentHandIndex).setHandFinalised();
+        }
 
         endCurrentHand();
     }
@@ -99,6 +124,7 @@ public class Game {
     }
 
     private void endCurrentHand(){
+        getCurrenPlayerHand().setHandFinalised();
         if(playerHands.size() >= (currentHandIndex+1)+1) {
             currentHandIndex++;
         }
@@ -121,39 +147,28 @@ public class Game {
         for (int i = 0; i < playerHands.size();i++)
         {
             Hand currentHand = playerHands.get(i);
-
+            System.out.println("Hand "+i);
             if(currentHand.isBust()){
+                System.out.println("LOST");
                 break;
             } else if (dealerHand.isBust() || currentHand.getHandValue() > dealerHand.getHandValue()) {
+                System.out.println("(Innit Bet) Payed back "+playerHands.get(i).getBet());
                 player.changeBalance(playerHands.get(i).getBet());                      // payback initial Bet
 
                 //player blackjack boni (only before splitting + first turn)
                 if(playerHands.size()==1 && currentHand.getHandValue()==21 && currentHand.getSize()==2) {
+                    System.out.println("(Blackjack) Won "+playerHands.get(i).getBet()*1.5);
                     player.changeBalance(playerHands.get(i).getBet()*1.5);      //Blackjack boni 3/2
                 }
                 else{
+                    System.out.println("(Normal) Won "+playerHands.get(i).getBet());
                     player.changeBalance(playerHands.get(i).getBet());                   //Normal Payback 1/1
                 }
             } else if (currentHand.getHandValue() == dealerHand.getHandValue()) {
+                System.out.println("(Push) Payed back "+playerHands.get(i).getBet()*1.5);
                 player.changeBalance(playerHands.get(i).getBet());                      //push (pay bet back)
             }
         }
-    }
-
-    public int getPlayerHandSize(){
-        return playerHands.size();
-    }
-    public int getCurrentHandIndex(){
-        return currentHandIndex;
-    }
-    public Hand getCurrenPlayerHand(){
-        return playerHands.get(currentHandIndex);
-    }
-    public Hand getDealerHand(){
-        return dealerHand;
-    }
-    public Player getPlayer(){
-        return player;
     }
 
     private void showHands(){

@@ -6,6 +6,7 @@ public class Hand {
     private Random rand = new Random();
     private ArrayList<Card> cards;
     private int bet;
+    private boolean isHandFinalised;
 
     public Hand() {
         cards = new ArrayList<>();
@@ -14,12 +15,41 @@ public class Hand {
     public int getBet(){
         return bet;
     }
-    public void setBet(int pAmount){
-        bet = pAmount;
-    }
     public int getSize(){
         return cards.size();
     }
+    public boolean getHandFinalised(){
+        return isHandFinalised;
+    }
+    public void setBet(int pAmount){
+        bet = pAmount;
+    }
+    public void setHandFinalised(){
+        isHandFinalised = true;
+    }
+
+    public boolean isBust(){
+        return getHandValue()>21;
+    }
+    public boolean isSplitAvailable(){
+        //returns if 2 cards and equalValue
+        return getSize() == 2 && cards.get(0).getValue() == cards.get(1).getValue() && !isHandFinalised;
+    }
+    public boolean isDoubleAvailable(){
+        //returns if 2 cards and equalValue
+        return getSize() == 2 && !isHandFinalised;
+    }
+
+
+    public void newCard(){
+        cards.add(getRandomCard());
+    }
+    private Card getRandomCard(){
+        CardSuit rSuit = CardSuit.values()[rand.nextInt(4)];
+        CardRank rRank = CardRank.values()[rand.nextInt(13)];
+        return new Card(rSuit,rRank);
+    }
+
 
     public int getHandValue(){
         int totalHandValue = 0;
@@ -45,24 +75,6 @@ public class Hand {
 
         return totalHandValue;
     }
-
-    public void newCard(){
-        cards.add(getRandomCard());
-    }
-    private Card getRandomCard(){
-        CardSuit rSuit = CardSuit.values()[rand.nextInt(4)];
-        CardRank rRank = CardRank.values()[rand.nextInt(13)];
-        return new Card(rSuit,rRank);
-    }
-
-    public boolean isBust(){
-        return getHandValue()>21;
-    }
-    public boolean isSplitAvailable(){
-        //returns if 2 cards and equalValue
-        return getSize() == 2 && cards.get(0).getValue() == cards.get(1).getValue();
-    }
-
     public Card getCardAtIndex(int pIndex){
         return cards.get(pIndex);
     }

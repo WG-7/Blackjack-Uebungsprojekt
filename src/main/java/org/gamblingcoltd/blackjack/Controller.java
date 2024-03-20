@@ -4,13 +4,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
-
 import java.util.Objects;
 
 public class Controller {
@@ -24,12 +23,29 @@ public class Controller {
     public Label cardValuePlayer;
     public Label bet;
 
+
+    @FXML
+    private Button betButton;
+    @FXML
+    private Button hitButton;
+    @FXML
+    private Button standButton;
+    @FXML
+    private Button doubleButton;
+    @FXML
+    private Button splitButton;
+    @FXML
+    private Button insureButton;
+
     private BlackjackManager blackjackManager;
     private Game currentGame;
     public Controller(){
         blackjackManager = BlackjackManager.getInstance();
         blackjackManager.initilizeAndRunBlackjack();
         currentGame = blackjackManager.gameHistory.get(blackjackManager.gameHistory.size()-1);
+    }
+    private void initialize() {
+        loadUI();
     }
 
     @FXML
@@ -40,8 +56,9 @@ public class Controller {
 
     }
 
-    public void setBet(){
+    public void handleBet(){
         currentGame.setBet(10);
+        currentGame.dealStartingCards();
         loadUI();
     }
 
@@ -71,6 +88,7 @@ public class Controller {
     }
 
     private void loadUI(){
+        updateButtonStates();
         loadCards();
 
         //Name and Balance
@@ -84,8 +102,14 @@ public class Controller {
 
         // Label DealerHand
         cardValueDealer.setText("Kartenwert: "+currentGame.getDealerHand().getHandValue());
+    }
 
-        loadCards();
+    private void updateButtonStates() {
+        hitButton.setDisable(currentGame.getCurrenPlayerHand().getHandFinalised());
+        standButton.setDisable(currentGame.getCurrenPlayerHand().getHandFinalised());
+        doubleButton.setDisable(!currentGame.getCurrenPlayerHand().isDoubleAvailable());
+        splitButton.setDisable(!currentGame.getCurrenPlayerHand().isSplitAvailable());
+        insureButton.setDisable(!currentGame.isInsureAvailable());
     }
 
     private void loadCards(){
@@ -99,12 +123,12 @@ public class Controller {
         cardBoxDealer.getChildren().clear();
 
         //modify according to screenHeight
-        cardBoxDealer.minHeight(screenHeight*0.2);
-        cardBoxDealer.maxHeight(screenHeight*0.2);
-        cardBoxPlayer.minHeight(screenHeight*0.2);
-        cardBoxPlayer.maxHeight(screenHeight*0.2);
-        double cardHeight = screenHeight*0.2;
-        double cardWidth = screenWidth*0.1;
+        cardBoxDealer.minHeight(screenHeight*0.3);
+        cardBoxDealer.maxHeight(screenHeight*0.3);
+        cardBoxPlayer.minHeight(screenHeight*0.3);
+        cardBoxPlayer.maxHeight(screenHeight*0.3);
+        double cardHeight = screenHeight*0.3;
+        double cardWidth = screenWidth*0.15;
 
         //Dealer
         Hand dealerHand = currentGame.getDealerHand();
@@ -156,7 +180,7 @@ public class Controller {
 
         for (int i = 0; i < cardBox.getChildren().size(); i++) {
             Node child = cardBox.getChildren().get(i);
-            double translateX = i * 80;
+            double translateX = i * 100;
             child.setTranslateX(-translateX+standartRightShift);
         }
     }
