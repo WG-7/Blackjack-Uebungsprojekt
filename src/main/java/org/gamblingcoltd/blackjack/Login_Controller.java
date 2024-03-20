@@ -20,7 +20,7 @@ public class Login_Controller {
     }
     public void handleLogin(ActionEvent actionEvent) throws IOException {
         blackjackManager.login(TfUsername.getText());
-        blackjackManager.initilizeAndRunBlackjack();
+        blackjackManager.beginNewGame();
 
         Parent newRoot = FXMLLoader.load(getClass().getResource("betting_view.fxml"));
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();

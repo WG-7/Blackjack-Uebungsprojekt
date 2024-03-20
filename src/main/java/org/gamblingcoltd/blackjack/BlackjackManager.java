@@ -1,7 +1,5 @@
 package org.gamblingcoltd.blackjack;
-import java.net.UnknownServiceException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class BlackjackManager {
     private Player player;
@@ -13,9 +11,8 @@ public class BlackjackManager {
         allPlayers = new ArrayList<>();
     }
 
-    public void initilizeAndRunBlackjack(){
+    public void beginNewGame(){
         Game game = new Game(player);
-        game.startAndExcuteGame();
         gameHistory.add(game);
     }
     public void login(String pUsername){
@@ -33,10 +30,8 @@ public class BlackjackManager {
         player = newPlayer;
     }
     public void reset(){
-        gameHistory.get(gameHistory.size()-1).endGame();
         player.setBalance(5000);
         Game game = new Game(player);
-        game.startAndExcuteGame();
         gameHistory.add(game);
     }
     public void showTutorial(){

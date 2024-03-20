@@ -65,7 +65,6 @@
 
             <!--Player Actions-->
             <HBox alignment="CENTER" spacing="10">
-                <Button fx:id="betButton" alignment="CENTER" text="Bet" onAction="#handleBet"/>
                 <Button fx:id="hitButton" alignment="CENTER" text="Hit" onAction="#handleHit"/>
                 <Button fx:id="standButton" alignment="CENTER" text="Stand" onAction="#handleStand"/>
                 <Button fx:id="doubleButton" alignment="CENTER" text="Double" onAction="#handleDouble"/>

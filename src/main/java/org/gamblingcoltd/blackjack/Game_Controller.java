@@ -1,15 +1,21 @@
 package org.gamblingcoltd.blackjack;
 
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Screen;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import java.io.IOException;
 import java.util.*;
 
 public class Game_Controller implements GameUpdateListener{
@@ -24,36 +30,61 @@ public class Game_Controller implements GameUpdateListener{
     private Game currentGame;
     public Game_Controller(){
         blackjackManager = BlackjackManager.getInstance();
-        blackjackManager.login("Malte");
-        blackjackManager.initilizeAndRunBlackjack();
         currentGame = blackjackManager.gameHistory.get(blackjackManager.gameHistory.size()-1);
         currentGame.setUpdateListener(this);
     }
+
     @Override
     public void updateUI() {
         loadUI();
     }
+    @Override
+    public void printWinMessage(double pAmount, int pHandIndex, String pMessage) {
+        Alert alert = new Alert(Alert.AlertType.NONE);
+        alert.setTitle("Payout Info");
+        alert.setHeaderText(pMessage);
+        if(pMessage.equals("Insurance Lost")) {
+            alert.setContentText("You lost your Insurance");
+        } else if (pMessage.equals("Insurance Won")) {
+            alert.setContentText("You won your Insurance and got "+pAmount+"€");
+        } else if (pAmount != 0){
+            alert.setContentText("Hand NR "+(pHandIndex+1)+" : "+pAmount+"€");
+        } else{
+            alert.setContentText("Hand NR "+(pHandIndex+1)+" : You got your Bet back");
+        }
+
+        Scene currentScene = hitButton.getScene();
+        alert.initOwner(currentScene.getWindow());
+        alert.showAndWait();
+    }
+
     public void initialize() {
-        loadUI();
+        currentGame.dealStartingCards();
+        PauseTransition pause = new PauseTransition(Duration.seconds(0.1)); 
+        pause.setOnFinished(event -> {
+            loadUI();
+        });
+        pause.play();
+
     }
 
     @FXML
     public void handleShowInstructions(ActionEvent actionEvent) {
     }
     @FXML
-    public void handleResetGame(ActionEvent actionEvent) {
-        System.out.println("Rest");
-        blackjackManager.reset();
-        blackjackManager.initilizeAndRunBlackjack();
-        currentGame = blackjackManager.gameHistory.get(blackjackManager.gameHistory.size()-1);
-        currentGame.setUpdateListener(this);
+    public void handleResetGame(ActionEvent actionEvent) throws IOException {
+        //set back bet
+        int amount = blackjackManager.getGameHistory().get(blackjackManager.getGameHistory().size()-1).getCurrenPlayerHand().getBet();
+        blackjackManager.getGameHistory().get(blackjackManager.getGameHistory().size()-1).increaseBet(-amount);
+        //load new game
+        blackjackManager.beginNewGame();
+
+        Parent newRoot = FXMLLoader.load(getClass().getResource("betting_view.fxml"));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene currentScene = stage.getScene();
+        currentScene.setRoot(newRoot);
     }
-    @FXML
-    public void handleBet(){
-        currentGame.setBet(10);
-        currentGame.dealStartingCards();
-        loadUI();
-    }
+
     @FXML
     public void handleHit(ActionEvent actionEvent) {
         currentGame.hit();
@@ -87,6 +118,11 @@ public class Game_Controller implements GameUpdateListener{
         handId.setText("Hand "+(currentGame.getCurrentHandIndex()+1)+" von "+currentGame.getPlayerHandSize());
         cardValuePlayer.setText("Kartenwert: "+currentGame.getCurrenPlayerHand().getHandValue());
         bet.setText("Einsatz: "+currentGame.getCurrenPlayerHand().getBet());
+
+        System.out.println(currentGame.getCurrenPlayerHand());
+        System.out.println(currentGame.getCurrenPlayerHand().getBet());
+        System.out.println(currentGame.getCurrentHandIndex());
+        System.out.println(currentGame.getDealerHand().getBet());
 
         // Label DealerHand
         cardValueDealer.setText("Kartenwert: "+currentGame.getDealerHand().getHandValue());

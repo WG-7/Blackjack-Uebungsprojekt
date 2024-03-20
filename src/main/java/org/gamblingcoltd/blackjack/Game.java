@@ -7,6 +7,7 @@ public class Game {
     private Player player;
     private ArrayList<Hand> playerHands;
     private int currentHandIndex;
+    private int insuranceAmount;
     private Hand dealerHand;
     private BlackjackManager blackjackManager;
     private GameUpdateListener updateListener;
@@ -28,13 +29,6 @@ public class Game {
         this.updateListener = listener;
     }
 
-    public void startAndExcuteGame(){
-        //am ende der methode:
-//        Game newGame = new Game(player);
-//        blackjackManager.getGameHistory().add(newGame);
-//        newGame.startAndExcuteGame();
-    }
-
     public Player getPlayer(){
         return player;
     }
@@ -54,8 +48,7 @@ public class Game {
         player.changeBalance(-pAmount);
         playerHands.get(currentHandIndex).setBet(pAmount);
     }
-    public void increaseBet(int pAmount)
-    {
+    public void increaseBet(int pAmount) {
         player.changeBalance(-pAmount);
         playerHands.get(currentHandIndex).setBet(playerHands.get(currentHandIndex).getBet() + pAmount);
         System.out.println(playerHands.get(currentHandIndex).getBet());
@@ -85,6 +78,10 @@ public class Game {
         }
     }
     public void stand(){
+        if (updateListener != null) {
+            updateListener.updateUI();
+        }
+
         endCurrentHand();
     }
     public void doubleDown(){
@@ -125,36 +122,34 @@ public class Game {
         }
     }
     public void insure(){
-        // Ask for InsureanceAmount
-        Scanner scanner = new Scanner(System.in);
-        Boolean isValidAmount = false;
-        int insuranceAmountInt = 0;
+        player.changeBalance(-playerHands.get(currentHandIndex).getBet());
 
-        do {
-            System.out.println("Wie hoch soll die Versicherung sein?(maximal " + playerHands.get(currentHandIndex).getBet() + ") :");
-            String insuranceAmount = scanner.nextLine();
-            insuranceAmountInt = Integer.parseInt(insuranceAmount);
-            if (insuranceAmountInt > 0 && insuranceAmountInt <= playerHands.get(currentHandIndex).getBet()) {
-                isValidAmount = true;
-                player.changeBalance(-insuranceAmountInt);
-            }
-        } while (!isValidAmount);
-        scanner.close();
+        int amount = 0;
+        String message = "";
 
         //Check for Dealer Blackjack
         if(dealerHand.getCardAtIndex(1).getValue()==10) {
-            player.changeBalance(insuranceAmountInt*2);         // 2/1 Ratio
+            player.changeBalance(playerHands.get(currentHandIndex).getBet()*2);         // 2/1 Ratio
+            message = "Insurance Won";
+            amount = playerHands.get(currentHandIndex).getBet();
+        }else{
+            message = "Insurance Lost";
         }
+        if (updateListener != null) {
+            updateListener.printWinMessage(amount, currentHandIndex, message);
+        }
+        if (updateListener != null) {
+            updateListener.updateUI();
+        }
+
         endCurrentHand();
     }
 
     private void endCurrentHand(){
         getCurrenPlayerHand().setHandFinalised();
+
         if(playerHands.size() >= (currentHandIndex+1)+1) {
             currentHandIndex++;
-            if (updateListener != null) {
-                updateListener.updateUI();
-            }
         }
         else {
             startDealersTurn();
@@ -174,14 +169,15 @@ public class Game {
 
     private void payWinningHands(){
         showHands();
-
         for (int i = 0; i < playerHands.size();i++)
         {
+            double amount = -playerHands.get(i).getBet();
+            String message = "You Lost";
+
             Hand currentHand = playerHands.get(i);
             System.out.println("Hand "+i);
             if(currentHand.isBust()){
                 System.out.println("LOST");
-                break;
             } else if (dealerHand.isBust() || currentHand.getHandValue() > dealerHand.getHandValue()) {
                 System.out.println("(Innit Bet) Payed back "+playerHands.get(i).getBet());
                 player.changeBalance(playerHands.get(i).getBet());                      // payback initial Bet
@@ -189,18 +185,32 @@ public class Game {
                 //player blackjack boni (only before splitting + first turn)
                 if(playerHands.size()==1 && currentHand.getHandValue()==21 && currentHand.getSize()==2) {
                     System.out.println("(Blackjack) Won "+playerHands.get(i).getBet()*1.5);
+                    message = "You Won";
+                    amount = playerHands.get(i).getBet()*1.5;
                     player.changeBalance(playerHands.get(i).getBet()*1.5);      //Blackjack boni 3/2
                 }
                 else{
                     System.out.println("(Normal) Won "+playerHands.get(i).getBet());
+                    message = "You Won";
+                    amount = playerHands.get(i).getBet();
                     player.changeBalance(playerHands.get(i).getBet());                   //Normal Payback 1/1
                 }
             } else if (currentHand.getHandValue() == dealerHand.getHandValue()) {
                 System.out.println("(Push) Payed back "+playerHands.get(i).getBet()*1.5);
+                message = "Push Back";
+                amount = playerHands.get(i).getBet();
                 player.changeBalance(playerHands.get(i).getBet());                      //push (pay bet back)
-            } else {
+            } else{
                 System.out.println("LOST");
             }
+
+            if (updateListener != null) {
+                updateListener.printWinMessage(amount, currentHandIndex, message);
+            }
+        }
+
+        if (updateListener != null) {
+            updateListener.updateUI();
         }
     }
 
@@ -213,9 +223,6 @@ public class Game {
         System.out.println();
         System.out.println("Dealer: "+dealerHand+"\t Value:"+dealerHand.getHandValue());
         System.out.println("--------------------------------------------------------------------");
-    }
-    public void endGame(){
-
     }
 }
 
