@@ -50,7 +50,6 @@ public class Hand {
         return new Card(rSuit,rRank);
     }
 
-
     public int getHandValue(){
         int totalHandValue = 0;
         int amountOfAces = 0;

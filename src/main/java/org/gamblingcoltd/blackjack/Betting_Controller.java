@@ -8,6 +8,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,7 +21,9 @@ public class Betting_Controller {
     @FXML
     public Label LbBetScreenPlayerName, LbBetSum, LbBettingBalance;
     @FXML
-    Button ChipValue10, ChipValue25, ChipValue50, ChipValue100, ChipValue500, handlePlayGame;
+    Button ChipValue10, ChipValue25, ChipValue50, ChipValue100, ChipValue500, handlePlayGame, BtremoveBet;
+    @FXML
+    ImageView ImageremoveBet;
     private BlackjackManager blackjackManager;
     private Map<Button, Integer> betButtons;
     public Betting_Controller(){
@@ -63,6 +67,8 @@ public class Betting_Controller {
     }
     public void addBetAndUpdateUI(int amount){
         blackjackManager.getGameHistory().get(blackjackManager.getGameHistory().size()-1).increaseBet(amount);
+        Image image = new Image(getClass().getResourceAsStream("@pokerchip_" + amount + ".png"));
+        ImageremoveBet.setImage(image);
         updateBettingUI();
     }
     public void updateBettingUI(){
@@ -88,4 +94,6 @@ public class Betting_Controller {
         addBetAndUpdateUI((int) blackjackManager.getPlayer().getBalance());
     }
 
+    public void handleRemoveBet(ActionEvent actionEvent) {
+    }
 }
