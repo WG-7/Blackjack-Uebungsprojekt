@@ -68,7 +68,10 @@ public class Game {
 
         //BlackjackCheck
         if(playerHands.get(currentHandIndex).getHandValue() == 21){
-            endCurrentHand();
+            getCurrenPlayerHand().setHandFinalised();
+        }
+        if (updateListener != null) {
+            updateListener.updateUI();
         }
     }
 
@@ -78,11 +81,14 @@ public class Game {
             updateListener.updateUI();
         }
         if(playerHands.get(currentHandIndex).getHandValue()>=21){
-            endCurrentHand();
+            getCurrenPlayerHand().setHandFinalised();
+        }
+        if (updateListener != null) {
+            updateListener.updateUI();
         }
     }
     public void stand(){
-        endCurrentHand();
+        getCurrenPlayerHand().setHandFinalised();
         if (updateListener != null) {
             updateListener.updateUI();
         }
@@ -97,8 +103,8 @@ public class Game {
         if (updateListener != null) {
             updateListener.updateUI();
         }
+        getCurrenPlayerHand().setHandFinalised();
 
-        endCurrentHand();
         if (updateListener != null) {
             updateListener.updateUI();
         }
@@ -121,7 +127,7 @@ public class Game {
 
         //Check for Blackjack of the current hand // secound hand will be checked on switch
         if(playerHands.get(currentHandIndex).getHandValue() == 21){
-            endCurrentHand();
+            getCurrenPlayerHand().setHandFinalised();
         }
 
         if (updateListener != null) {
@@ -150,19 +156,18 @@ public class Game {
             updateListener.printWinMessage(amount, currentHandIndex, message);
         }
 
-        endCurrentHand();
         if (updateListener != null) {
             updateListener.updateUI();
         }
     }
 
-    private void endCurrentHand(){
+    public void endCurrentHand(){
         getCurrenPlayerHand().setHandFinalised();
 
         if(playerHands.size() >= (currentHandIndex+1)+1) {
             currentHandIndex++;
             if(playerHands.get(currentHandIndex).getHandValue() == 21){
-                endCurrentHand();
+                getCurrenPlayerHand().setHandFinalised();
             }
         }
         else {
@@ -215,7 +220,7 @@ public class Game {
             } else if (currentHand.getHandValue() == dealerHand.getHandValue()) {
                 System.out.println("(Push) Payed back "+playerHands.get(i).getBet());
                 message = "Push Back";
-                amount = playerHands.get(i).getBet();
+                amount = 0;
                 player.changeBalance(playerHands.get(i).getBet());                      //push (pay bet back)
             } else{
                 System.out.println("LOST");

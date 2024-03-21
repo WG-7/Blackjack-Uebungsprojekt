@@ -24,7 +24,7 @@ public class Main extends Application {
         Parent root2 = fxmlLoader2.load();
         Scene loginScene = new Scene(root2);
 
-        stage.setFullScreen(false);
+        stage.setFullScreen(true);
         stage.setFullScreenExitHint("");
         stage.setTitle("Blackjack");
         stage.setScene(loginScene);

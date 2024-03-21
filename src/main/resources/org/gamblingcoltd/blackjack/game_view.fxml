@@ -70,6 +70,7 @@
                 <Button fx:id="doubleButton" alignment="CENTER" text="Double" onAction="#handleDouble"/>
                 <Button fx:id="splitButton" alignment="CENTER" text="Split" onAction="#handleSplit"/>
                 <Button fx:id="insureButton" alignment="CENTER" text="Insure" onAction="#handleInsure"/>
+                <Button fx:id="nextButton" alignment="CENTER" text="Next Hand" onAction="#handleNextHand"/>
             </HBox>
 
         </VBox>

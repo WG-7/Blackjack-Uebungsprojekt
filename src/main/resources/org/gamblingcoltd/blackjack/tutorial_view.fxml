@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="org.gamblingcoltd.blackjack.Tutorial_Controller"
+            stylesheets="@style.css">
+    <center>
+        <VBox spacing="20" alignment="CENTER">
+            <Label text="Dealer"/>
+            <!--Dealer Cards-->
+            <HBox spacing="30" alignment="CENTER">
+                <VBox alignment="CENTER" minWidth="200">
+                    <Label text="Tutorial"/>
+                    <Label text="Tutorial"/>
+                    <Button fx:id="endTutorial" text="End Tutorial" onAction="#endTutorial"/>
+                </VBox>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

@@ -24,7 +24,7 @@ public class Game_Controller implements GameUpdateListener{
     @FXML
     public HBox cardBoxPlayer, cardBoxDealer;
     @FXML
-    private Button hitButton, standButton, doubleButton, splitButton, insureButton;
+    private Button hitButton, standButton, doubleButton, splitButton, insureButton, nextButton;
 
     private BlackjackManager blackjackManager;
     private Game currentGame;
@@ -69,7 +69,11 @@ public class Game_Controller implements GameUpdateListener{
     }
 
     @FXML
-    public void handleShowInstructions(ActionEvent actionEvent) {
+    public void handleShowInstructions(ActionEvent actionEvent) throws IOException {
+        Parent newRoot = FXMLLoader.load(getClass().getResource("tutorial_view.fxml"));
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Scene currentScene = stage.getScene();
+        currentScene.setRoot(newRoot);
     }
     @FXML
     public void handleResetGame(ActionEvent actionEvent) throws IOException {
@@ -109,6 +113,10 @@ public class Game_Controller implements GameUpdateListener{
         currentGame.insure();
     }
 
+    public void handleNextHand(ActionEvent actionEvent) {
+        currentGame.endCurrentHand();
+    }
+
     private void loadUI(){
         updateButtonStates();
         loadCards();
@@ -137,6 +145,7 @@ public class Game_Controller implements GameUpdateListener{
         doubleButton.setDisable(!currentGame.getCurrenPlayerHand().isDoubleAvailable());
         splitButton.setDisable(!currentGame.getCurrenPlayerHand().isSplitAvailable());
         insureButton.setDisable(!currentGame.isInsureAvailable());
+        nextButton.setDisable(!currentGame.getCurrenPlayerHand().getHandFinalised());
     }
 
     private void loadCards(){
@@ -211,7 +220,6 @@ public class Game_Controller implements GameUpdateListener{
             child.setTranslateX(-translateX+standartRightShift);
         }
     }
-
 
 
 
