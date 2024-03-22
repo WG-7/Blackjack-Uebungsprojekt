@@ -173,7 +173,7 @@ public class Game_Controller implements GameUpdateListener{
             String cardUrl ="";
             Image card;
             if(dealerHand.getBet()==-1 && i==0){
-                card = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/org/gamblingcoltd/blackjack/CardPNG/red_joker.png")));
+                card = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/org/gamblingcoltd/blackjack/CardPNG/Backside.png")));
             } else {
                 cardUrl = dealerHand.getCardAtIndex(i).getUrl();
                 card = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/org/gamblingcoltd/blackjack/CardPNG/"+cardUrl)));
